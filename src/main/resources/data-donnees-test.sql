@@ -16,7 +16,7 @@ INSERT INTO Convention (nom,subvention,salarie_maximum) VALUES
 ("contrat3",1000.99,1);
 
 INSERT INTO salarie (matricule,code_barre) VALUES
-("Jeff", 1 ) ,
-("Jarry" , 2) ,
-("Pedro" , 2) ,
-("Claire" , 3);
+("Jeff", 1234 ) ,
+("Jarry" , 2341) ,
+("Pedro" , 3412) ,
+("Claire" , 4123);
