@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,4 +25,8 @@ public class Salarie {
 
         @Column(nullable = false)
         private String codeBarre;
-}
+
+        @ManyToOne
+        @JoinColumn(name = "convention_id")
+        Convention salarieParConvention;
+    }

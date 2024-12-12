@@ -23,4 +23,7 @@ public class Utilisateur {
         @Column(nullable = false)
         String password;
 
+        @ManyToOne
+        @JoinColumn(name = "entreprise_id")
+        Entreprise utilisateurDansEntreprise;
 }

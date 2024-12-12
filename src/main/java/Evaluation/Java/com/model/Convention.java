@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,14 +22,20 @@ public class Convention {
     Integer id;
 
     @Column(nullable = false)
-    private String nom;
+    String nom;
 
     @Column(nullable = false)
     @PositiveOrZero(message = "La subvention ne peut pas être négative.")
-    private float subvention;
+    Float subvention;
 
     @Column(nullable = false)
     @Min(1)
-    private int salarie_Maximum;
+    Integer salarie_Maximum;
 
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id")
+    Entreprise conventionParEntreprise;
+
+    @OneToMany(mappedBy = "salarieParConvention")
+    List<Salarie> salaries;
 }

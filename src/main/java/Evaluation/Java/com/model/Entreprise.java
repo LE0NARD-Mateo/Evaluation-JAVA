@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,5 +21,11 @@ public class Entreprise {
 
     @Column(unique = true, nullable = false)
     String nom;
+
+    @OneToMany(mappedBy = "utilisateurDansEntreprise")
+    List<Utilisateur> utilisateurs;
+
+    @OneToMany(mappedBy = "conventionParEntreprise")
+    List<Convention> conventions;
 }
 
