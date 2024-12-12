@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer> {
+public interface ConventionDao extends JpaRepository<Utilisateur, Integer> {
 
-    Optional<Utilisateur> findByEmail(String email);
 }
