@@ -28,6 +28,21 @@ public class Convention {
     @PositiveOrZero(message = "La subvention ne peut pas être négative.")
     Float subvention;
 
+    public @Min(1) Integer getSalarie_Maximum() {
+        return salarie_Maximum;
+    }
+
+    public void setSalarie_Maximum(@Min(1) Integer salarie_Maximum) {
+        this.salarie_Maximum = salarie_Maximum;
+    }
+
+    public @PositiveOrZero(message = "La subvention ne peut pas être négative.") Float getSubvention() {
+        return subvention;
+    }
+
+    public void setSubvention(@PositiveOrZero(message = "La subvention ne peut pas être négative.") Float subvention) {
+        this.subvention = subvention;
+    }
     @Column(nullable = false)
     @Min(1)
     Integer salarie_Maximum;
@@ -38,4 +53,37 @@ public class Convention {
 
     @OneToMany(mappedBy = "salarieParConvention")
     List<Salarie> salaries;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Entreprise getConventionParEntreprise() {
+        return conventionParEntreprise;
+    }
+
+    public void setConventionParEntreprise(Entreprise conventionParEntreprise) {
+        this.conventionParEntreprise = conventionParEntreprise;
+    }
+
+    public List<Salarie> getSalaries() {
+        return salaries;
+    }
+
+    public void setSalaries(List<Salarie> salaries) {
+        this.salaries = salaries;
+    }
+
 }

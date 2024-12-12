@@ -27,5 +27,37 @@ public class Entreprise {
 
     @OneToMany(mappedBy = "conventionParEntreprise")
     List<Convention> conventions;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
+    public List<Convention> getConventions() {
+        return conventions;
+    }
+
+    public void setConventions(List<Convention> conventions) {
+        this.conventions = conventions;
+    }
 }
 
