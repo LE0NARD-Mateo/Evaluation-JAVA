@@ -1,5 +1,6 @@
 package Evaluation.Java.com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,9 +23,11 @@ public class Entreprise {
     @Column(unique = true, nullable = false)
     String nom;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "utilisateurDansEntreprise")
     List<Utilisateur> utilisateurs;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conventionParEntreprise")
     List<Convention> conventions;
 

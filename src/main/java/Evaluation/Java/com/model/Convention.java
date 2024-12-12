@@ -1,5 +1,6 @@
 package Evaluation.Java.com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -51,6 +52,7 @@ public class Convention {
     @JoinColumn(name = "entreprise_id")
     Entreprise conventionParEntreprise;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "salarieParConvention")
     List<Salarie> salaries;
 
