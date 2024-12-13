@@ -26,7 +26,6 @@ public class SalarieController {
 
     }
 
-    @IsEntreprise
     @GetMapping("/salarie/{id}")
     public ResponseEntity<Salarie> get(@PathVariable Integer id) {
 

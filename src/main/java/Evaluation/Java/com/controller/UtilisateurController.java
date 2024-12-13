@@ -32,7 +32,6 @@ public class UtilisateurController {
 
     }
 
-    @IsAdministateur
     @GetMapping("/utilisateur/{id}")
     public ResponseEntity<Utilisateur> get(@PathVariable Integer id) {
 

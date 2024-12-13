@@ -1,7 +1,11 @@
 package Evaluation.Java.com.controller;
 
+import Evaluation.Java.com.dao.ConventionDao;
 import Evaluation.Java.com.dao.EntrepriseDao;
+import Evaluation.Java.com.dao.SalarieDao;
+import Evaluation.Java.com.model.Convention;
 import Evaluation.Java.com.model.Entreprise;
+import Evaluation.Java.com.model.Salarie;
 import Evaluation.Java.com.security.IsAdministateur;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,12 @@ public class EntrepriseController {
     @Autowired
     private EntrepriseDao entrepriseDao;
 
+    @Autowired
+    private ConventionDao conventionDao;
+
+    @Autowired
+    private SalarieDao salarieDao;
+
     @GetMapping("/entreprise")
     public List<Entreprise> getAll() {
 
@@ -26,7 +36,36 @@ public class EntrepriseController {
 
     }
 
-    @IsAdministateur
+    @GetMapping("/entreprise/convention/{id}")
+    public ResponseEntity<List<Convention>> findAllConventionsByEntrepriseId(@PathVariable int id) {
+        Optional<Entreprise> optionalEntreprise = entrepriseDao.findById(id);
+
+        // Si l'utilisateur n'existe pas
+        if (optionalEntreprise.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Correct method call to fetch conventions from conventionDao
+        List<Convention> conventions = conventionDao.findAllConventionsByEntrepriseId(id);
+
+        return ResponseEntity.ok(conventions);
+    }
+
+    @GetMapping("/entreprise/salarie/{id}")
+    public ResponseEntity<List<Salarie>> findAllSalariesByEntrepriseId(@PathVariable int id) {
+        Optional<Entreprise> optionalEntreprise = entrepriseDao.findById(id);
+
+        // If the Entreprise doesn't exist, return NOT_FOUND
+        if (optionalEntreprise.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Use salarieDao to fetch the salaries associated with the given Entreprise ID
+        List<Salarie> salaries = salarieDao.findAllSalariesByEntrepriseId(id);
+
+        return ResponseEntity.ok(salaries);
+    }
+
     @GetMapping("/entreprise/{id}")
     public ResponseEntity<Entreprise> get(@PathVariable Integer id) {
 
