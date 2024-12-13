@@ -38,3 +38,27 @@ http://localhost:8080/salarie:
     "salarie_Maximum": 2
   }
 }
+
+bearer admin : eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YXRhQGdtYWlsLmNvbSJ9.gjARm3bgLR-JIcplHeIZgbaExyMzprOFuA5W8eQJAMw
+
+bearer entreprise : eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3RvQGdtYWlsLmNvbSJ9.eZ5kVXS2J3bQoEx2eGeKwSlCTZLEMXhH20IwqINqxxI
+
+mot de passe pour chaque utilisateur : azerty
+
+http://localhost:8080/connexion:
+
+{
+    "email": "tata@gmail.com",
+    "password": "azerty"
+  },
+
+pour bearer admin
+
+http://localhost:8080/connexion:
+
+{
+    "email": "toto@gmail.com",
+    "password": "azerty"
+  },
+
+pour bearer entreprise
