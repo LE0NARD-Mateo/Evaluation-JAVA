@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface SalarieDao extends JpaRepository<Salarie, Integer> {
 
+    @Query("SELECT COUNT(s) FROM Salarie s WHERE s.salarieParConvention.id = :conventionId")
+    int countSalariesByConventionId(@Param("conventionId") Integer conventionId);
+
     @Query("SELECT s FROM Salarie s WHERE s.salarieParConvention.conventionParEntreprise.id = :entrepriseId")
     List<Salarie> findAllSalariesByEntrepriseId(@Param("entrepriseId") Integer entrepriseId);
 }

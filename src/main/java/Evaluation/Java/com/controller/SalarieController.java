@@ -1,6 +1,8 @@
 package Evaluation.Java.com.controller;
 
+import Evaluation.Java.com.dao.ConventionDao;
 import Evaluation.Java.com.dao.SalarieDao;
+import Evaluation.Java.com.model.Convention;
 import Evaluation.Java.com.model.Salarie;
 import Evaluation.Java.com.security.IsEntreprise;
 import jakarta.validation.Valid;
@@ -18,6 +20,9 @@ public class SalarieController {
 
     @Autowired
     private SalarieDao salarieDao;
+
+    @Autowired
+    private ConventionDao conventionDao;
 
     @GetMapping("/salarie")
     public List<Salarie> getAll() {
@@ -43,8 +48,18 @@ public class SalarieController {
     @IsEntreprise
     @PostMapping("/salarie")
     public ResponseEntity<Salarie> create(@Valid @RequestBody Salarie salarie) {
+        Convention convention = salarie.getSalarieParConvention();
+        Optional<Convention> optionalConvention = conventionDao.findById(convention.getId());
 
-        //on force l'id à null au cas où le client en aurait fourni un
+        if (optionalConvention.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        int currentCount = salarieDao.countSalariesByConventionId(convention.getId());
+        if (currentCount >= convention.getSalarie_Maximum()) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        
         salarie.setId(null);
         salarieDao.save(salarie);
 
