@@ -2,6 +2,7 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.ConventionDao;
 import Evaluation.Java.com.model.Convention;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class ConventionController {
     }
 
     @PostMapping("/convention")
-    public ResponseEntity<Convention> create(@RequestBody Convention convention) {
+    public ResponseEntity<Convention> create(@Valid @RequestBody Convention convention) {
 
         //on force l'id à null au cas où le client en aurait fourni un
         convention.setId(null);
@@ -49,7 +50,7 @@ public class ConventionController {
     }
 
     @PutMapping("/convention/{id}")
-    public ResponseEntity<Convention> update(@RequestBody Convention convention, @PathVariable Integer id) {
+    public ResponseEntity<Convention> update(@Valid @RequestBody Convention convention, @PathVariable Integer id) {
 
         //on force le changement de l'id de l'convention à enregitrer à l'id passé en paramètre
         convention.setId(id);

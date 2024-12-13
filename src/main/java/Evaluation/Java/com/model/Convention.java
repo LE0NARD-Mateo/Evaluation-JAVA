@@ -3,6 +3,7 @@ package Evaluation.Java.com.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +24,25 @@ public class Convention {
     Integer id;
 
     @Column(nullable = false)
+    @NotNull(message = "Le code barre ne peut pas être null.")
     String nom;
 
     @Column(nullable = false)
+    @NotNull(message = "Le code barre ne peut pas être null.")
     @PositiveOrZero(message = "La subvention ne peut pas être négative.")
     Float subvention;
+
+    @Column(nullable = false)
+    @Min(1)
+    Integer salarie_Maximum;
+
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id")
+    Entreprise conventionParEntreprise;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "salarieParConvention")
+    List<Salarie> salaries;
 
     public @Min(1) Integer getSalarie_Maximum() {
         return salarie_Maximum;
@@ -44,17 +59,6 @@ public class Convention {
     public void setSubvention(@PositiveOrZero(message = "La subvention ne peut pas être négative.") Float subvention) {
         this.subvention = subvention;
     }
-    @Column(nullable = false)
-    @Min(1)
-    Integer salarie_Maximum;
-
-    @ManyToOne
-    @JoinColumn(name = "entreprise_id")
-    Entreprise conventionParEntreprise;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "salarieParConvention")
-    List<Salarie> salaries;
 
     public String getNom() {
         return nom;

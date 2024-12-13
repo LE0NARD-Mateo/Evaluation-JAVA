@@ -2,6 +2,7 @@ package Evaluation.Java.com.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Entreprise {
     Integer id;
 
     @Column(unique = true, nullable = false)
+    @NotNull(message = "Le code barre ne peut pas être null.")
     String nom;
 
     @JsonIgnore

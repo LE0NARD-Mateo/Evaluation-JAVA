@@ -2,6 +2,7 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.SalarieDao;
 import Evaluation.Java.com.model.Salarie;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class SalarieController {
     }
 
     @PostMapping("/salarie")
-    public ResponseEntity<Salarie> create(@RequestBody Salarie salarie) {
+    public ResponseEntity<Salarie> create(@Valid @RequestBody Salarie salarie) {
 
         //on force l'id à null au cas où le client en aurait fourni un
         salarie.setId(null);
@@ -49,7 +50,7 @@ public class SalarieController {
     }
 
     @PutMapping("/salarie/{id}")
-    public ResponseEntity<Salarie> update(@RequestBody Salarie salarie, @PathVariable Integer id) {
+    public ResponseEntity<Salarie> update(@Valid @RequestBody Salarie salarie, @PathVariable Integer id) {
 
         //on force le changement de l'id de l'salarieà enregitrer à l'id passé en paramètre
         salarie.setId(id);

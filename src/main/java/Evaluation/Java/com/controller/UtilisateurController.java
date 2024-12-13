@@ -2,7 +2,6 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.UtilisateurDao;
 import Evaluation.Java.com.model.Utilisateur;
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,8 +42,7 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur")
-    public ResponseEntity<Utilisateur> create(
-            @RequestBody @Valid Utilisateur utilisateur) {
+    public ResponseEntity<Utilisateur> create(@Valid @RequestBody Utilisateur utilisateur) {
 
         utilisateur.setId(null);
 
@@ -55,7 +53,7 @@ public class UtilisateurController {
 
     @PutMapping("/utilisateur/{id}")
     public ResponseEntity<Utilisateur> update(
-            @RequestBody @Valid Utilisateur utilisateur, @PathVariable Integer id) {
+            @Valid @RequestBody Utilisateur utilisateur, @PathVariable Integer id) {
 
         //on force le changement de l'id de l'utilisateur à enregitrer à l'id passé en paramètre
         utilisateur.setId(id);

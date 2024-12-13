@@ -1,6 +1,7 @@
 package Evaluation.Java.com.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,11 +21,13 @@ public class Salarie {
         Integer id;
 
         @Column(length = 10, nullable = false)
+        @NotNull(message = "Le code barre ne peut pas être null.")
         @Size(min = 3, max = 10, message = "Le matricule doit contenir entre 3 et 10 caractères.")
-        private String matricule;
+        String matricule;
 
         @Column(nullable = false)
-        private String codeBarre;
+        @NotNull(message = "Le code barre ne peut pas être null.")
+        String codeBarre;
 
         @ManyToOne
         @JoinColumn(name = "convention_id")

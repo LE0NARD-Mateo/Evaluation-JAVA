@@ -2,6 +2,7 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.EntrepriseDao;
 import Evaluation.Java.com.model.Entreprise;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class EntrepriseController {
     }
 
     @PostMapping("/entreprise")
-    public ResponseEntity<Entreprise> create(@RequestBody Entreprise entreprise) {
+    public ResponseEntity<Entreprise> create(@Valid @RequestBody Entreprise entreprise) {
 
         //on force l'id à null au cas où le client en aurait fourni un
         entreprise.setId(null);
@@ -49,7 +50,7 @@ public class EntrepriseController {
     }
 
     @PutMapping("/entreprise/{id}")
-    public ResponseEntity<Entreprise> update(@RequestBody Entreprise entreprise, @PathVariable Integer id) {
+    public ResponseEntity<Entreprise> update(@Valid @RequestBody Entreprise entreprise, @PathVariable Integer id) {
 
         //on force le changement de l'id de l'convention à enregitrer à l'id passé en paramètre
         entreprise.setId(id);
