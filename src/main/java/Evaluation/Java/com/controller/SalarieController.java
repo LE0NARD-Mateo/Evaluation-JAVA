@@ -59,7 +59,7 @@ public class SalarieController {
         if (currentCount >= convention.getSalarie_Maximum()) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        
+
         salarie.setId(null);
         salarieDao.save(salarie);
 

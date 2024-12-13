@@ -3,9 +3,7 @@ package Evaluation.Java.com;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -16,7 +14,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 public class TestUrlSecuriser {
 
     @Autowired
@@ -33,21 +30,45 @@ public class TestUrlSecuriser {
     @Test
     @WithMockUser(username = "admin", roles = "administrateur")
     public void testUtilisateurEndpointWithAuth() throws Exception {
-        mockMvc.perform(get("http://localhost:8080/utilisateur"))
+        mockMvc.perform(get("/utilisateur"))
                 .andExpect(status().isOk());
     }
 
     @Test
     @WithMockUser(username = "admin", roles = "administrateur")
     public void testSalarieEndpointWithAuth() throws Exception {
-        mockMvc.perform(get("http://localhost:8080/salarie"))
+        mockMvc.perform(get("/salarie"))
                 .andExpect(status().isOk());
     }
 
     @Test
     @WithMockUser(username = "admin", roles = "administrateur")
     public void testConventionEndpointWithAuth() throws Exception {
-        mockMvc.perform(get("http://localhost:8080/convention"))
+        mockMvc.perform(get("/convention"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testSalarieEndpoint() throws Exception  {
+
+        mockMvc.perform(get("/salarie"))
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
+    public void testConventionEndpoint() throws Exception  {
+
+        mockMvc.perform(get("/convention"))
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
+    public void testUtilisateurEndpoint() throws Exception  {
+
+        mockMvc.perform(get("/utilisateur"))
+                .andExpect(status().isForbidden());
+
     }
 }
