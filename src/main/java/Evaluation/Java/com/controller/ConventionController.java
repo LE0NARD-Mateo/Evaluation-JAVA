@@ -2,6 +2,8 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.ConventionDao;
 import Evaluation.Java.com.model.Convention;
+import Evaluation.Java.com.security.IsAdministateur;
+import Evaluation.Java.com.security.IsEntreprise;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +41,7 @@ public class ConventionController {
        return new ResponseEntity<>(optionalConvention.get(), HttpStatus.OK);
     }
 
+    @IsAdministateur
     @PostMapping("/convention")
     public ResponseEntity<Convention> create(@Valid @RequestBody Convention convention) {
 
@@ -49,6 +52,7 @@ public class ConventionController {
         return new ResponseEntity<>(convention, HttpStatus.CREATED);
     }
 
+    @IsEntreprise
     @PutMapping("/convention/{id}")
     public ResponseEntity<Convention> update(@Valid @RequestBody Convention convention, @PathVariable Integer id) {
 
@@ -68,6 +72,7 @@ public class ConventionController {
         return new ResponseEntity<>(convention, HttpStatus.OK);
     }
 
+    @IsAdministateur
     @DeleteMapping("/convention/{id}")
     public ResponseEntity<Convention> delete(@PathVariable Integer id) {
 

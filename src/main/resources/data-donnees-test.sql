@@ -6,9 +6,9 @@ INSERT INTO entreprise (nom) VALUES
 
 -- mot de passe = root --
 INSERT INTO utilisateur (entreprise_id,email, password) VALUES
-(null,"tata@gmail.com",  "$2a$10$31nhEmGLow2iIug.qqq6RuG3GXv1fo6wXfojXNswxqYqwR8kUJUEm"),
-(1,"toto@gmail.com",  "$2a$10$31nhEmGLow2iIug.qqq6RuG3GXv1fo6wXfojXNswxqYqwR8kUJUEm"),
-(2,"titi@gmail.com",  "$2a$10$31nhEmGLow2iIug.qqq6RuG3GXv1fo6wXfojXNswxqYqwR8kUJUEm");
+(null,"tata@gmail.com",  "$2a$10$wlLBMf0wrA4XqcigEqeIjuZJ5zwCrS7PYgUrrThUAiAfqehK3NIty"),
+(1,"toto@gmail.com",  "$2a$10$wlLBMf0wrA4XqcigEqeIjuZJ5zwCrS7PYgUrrThUAiAfqehK3NIty"),
+(2,"titi@gmail.com",  "$2a$10$wlLBMf0wrA4XqcigEqeIjuZJ5zwCrS7PYgUrrThUAiAfqehK3NIty");
 
 INSERT INTO Convention (entreprise_id,nom,subvention,salarie_maximum) VALUES
 (1,"contrat1",2000.99,2) ,

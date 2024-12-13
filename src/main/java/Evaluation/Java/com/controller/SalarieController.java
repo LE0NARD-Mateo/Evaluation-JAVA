@@ -2,6 +2,7 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.SalarieDao;
 import Evaluation.Java.com.model.Salarie;
+import Evaluation.Java.com.security.IsEntreprise;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class SalarieController {
 
     }
 
+    @IsEntreprise
     @GetMapping("/salarie/{id}")
     public ResponseEntity<Salarie> get(@PathVariable Integer id) {
 
@@ -39,6 +41,7 @@ public class SalarieController {
        return new ResponseEntity<>(optionalSalarie.get(), HttpStatus.OK);
     }
 
+    @IsEntreprise
     @PostMapping("/salarie")
     public ResponseEntity<Salarie> create(@Valid @RequestBody Salarie salarie) {
 
@@ -49,6 +52,7 @@ public class SalarieController {
         return new ResponseEntity<>(salarie, HttpStatus.CREATED);
     }
 
+    @IsEntreprise
     @PutMapping("/salarie/{id}")
     public ResponseEntity<Salarie> update(@Valid @RequestBody Salarie salarie, @PathVariable Integer id) {
 
@@ -68,6 +72,7 @@ public class SalarieController {
         return new ResponseEntity<>(salarie, HttpStatus.OK);
     }
 
+    @IsEntreprise
     @DeleteMapping("/salarie/{id}")
     public ResponseEntity<Salarie> delete(@PathVariable Integer id) {
 

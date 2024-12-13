@@ -2,10 +2,12 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.UtilisateurDao;
 import Evaluation.Java.com.model.Utilisateur;
+import Evaluation.Java.com.security.IsAdministateur;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,9 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurDao utilisateurDao;
 
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     @GetMapping("/utilisateur")
     public List<Utilisateur> getAll() {
 
@@ -27,6 +32,7 @@ public class UtilisateurController {
 
     }
 
+    @IsAdministateur
     @GetMapping("/utilisateur/{id}")
     public ResponseEntity<Utilisateur> get(@PathVariable Integer id) {
 
@@ -41,16 +47,20 @@ public class UtilisateurController {
        return new ResponseEntity<>(optionalUtilisateur.get(),HttpStatus.OK);
     }
 
+    @IsAdministateur
     @PostMapping("/utilisateur")
     public ResponseEntity<Utilisateur> create(@Valid @RequestBody Utilisateur utilisateur) {
 
         utilisateur.setId(null);
+
+        utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
 
         utilisateurDao.save(utilisateur);
 
         return new ResponseEntity<>(utilisateur, HttpStatus.CREATED);
     }
 
+    @IsAdministateur
     @PutMapping("/utilisateur/{id}")
     public ResponseEntity<Utilisateur> update(
             @Valid @RequestBody Utilisateur utilisateur, @PathVariable Integer id) {
@@ -71,6 +81,7 @@ public class UtilisateurController {
         return new ResponseEntity<>(utilisateur, HttpStatus.OK);
     }
 
+    @IsAdministateur
     @DeleteMapping("/utilisateur/{id}")
     public ResponseEntity<Utilisateur> delete(@PathVariable Integer id) {
 

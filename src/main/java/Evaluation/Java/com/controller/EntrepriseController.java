@@ -2,6 +2,7 @@ package Evaluation.Java.com.controller;
 
 import Evaluation.Java.com.dao.EntrepriseDao;
 import Evaluation.Java.com.model.Entreprise;
+import Evaluation.Java.com.security.IsAdministateur;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class EntrepriseController {
 
     }
 
+    @IsAdministateur
     @GetMapping("/entreprise/{id}")
     public ResponseEntity<Entreprise> get(@PathVariable Integer id) {
 
@@ -39,6 +41,7 @@ public class EntrepriseController {
        return new ResponseEntity<>(optionalEntreprise.get(), HttpStatus.OK);
     }
 
+    @IsAdministateur
     @PostMapping("/entreprise")
     public ResponseEntity<Entreprise> create(@Valid @RequestBody Entreprise entreprise) {
 
@@ -49,6 +52,7 @@ public class EntrepriseController {
         return new ResponseEntity<>(entreprise, HttpStatus.CREATED);
     }
 
+    @IsAdministateur
     @PutMapping("/entreprise/{id}")
     public ResponseEntity<Entreprise> update(@Valid @RequestBody Entreprise entreprise, @PathVariable Integer id) {
 
@@ -68,6 +72,7 @@ public class EntrepriseController {
         return new ResponseEntity<>(entreprise, HttpStatus.OK);
     }
 
+    @IsAdministateur
     @DeleteMapping("/entreprise/{id}")
     public ResponseEntity<Entreprise> delete(@PathVariable Integer id) {
 
